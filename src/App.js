@@ -19,7 +19,7 @@ import requests from './Request';
 // Start of APP
 const App = () => {
   const [articles, setData] = useState([]);
- 
+  // fetch IDs of topstories
   const fetchData = () => {
     fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
     .then(response => response.json())
@@ -27,8 +27,8 @@ const App = () => {
       console.log('old', data);
       return data;
     })
-    .then(data => {
-      return Promise.all(data.filter((e, x) => x < 20).map(id =>
+    .then(data => { // fetch detail information of topstories based on IDs obtained in the first fetch
+      return Promise.all(data.filter((e, x) => x < 20).map(id =>  // limit fetched articles to 20
         fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
           .then(resp => resp.json())
           .then(json => {
@@ -37,7 +37,7 @@ const App = () => {
           })
       ))
     })
-    .then(data => setData(data))
+    .then(data => setData(data));
   }
 
   useEffect(() => { fetchData() }, []);
@@ -51,10 +51,12 @@ const App = () => {
       {articles.map(article => {   
         return ( 
           <>
-           <Main {...article}/>
+            <Main {...article}/>
           </>
         )})
       }
+      <button className='btn btn-outline-primary'>Previous Articles</button>
+      <button className='btn btn-outline-primary'>Next 20 Articles</button>
     </div>
   )
 }
