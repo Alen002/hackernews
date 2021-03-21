@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import Header from './components/Header';
-import Main  from './components/Main';
-import Footer from './components/Footer';
-import requests from './Request';
+import { useEffect, useState } from "react";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
+import requests from "./Request";
 
 /* const fetchData = async (callback, api, get) => {
   try {
@@ -19,47 +19,62 @@ import requests from './Request';
 // Start of APP
 const App = () => {
   const [articles, setData] = useState([]);
-  // fetch IDs of topstories
-  const fetchData = () => {
-    fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
-    .then(response => response.json())
-    .then(data => {
-      console.log('old', data);
-      return data;
-    })
-    .then(data => { // fetch detail information of topstories based on IDs obtained in the first fetch
-      return Promise.all(data.filter((e, x) => x < 20).map(id =>  // limit fetched articles to 20
-        fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
-          .then(resp => resp.json())
-          .then(json => {
-            console.log('Articles', json); 
-            return json;
-          })
-      ))
-    })
-    .then(data => setData(data));
-  }
 
-  useEffect(() => { fetchData() }, []);
+  // fetch IDs of topstories
+  const fetchData = (more) => {
+    fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("IDs", data);
+        return data;
+      })
+      .then((data) => {
+        // fetch detail information of topstories based on IDs obtained from the first fetch
+        return Promise.all(
+          data
+            .filter((e, x) => x < more)
+            .map((
+              id // limit fetched articles
+            ) =>
+              fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+                .then((resp) => resp.json())
+                .then((json) => {
+                  console.log("Articles", json);
+                  return json;
+                })
+            )
+        );
+      })
+      .then((data) => setData(data));
+  };
+
+  useEffect(() => {
+    fetchData(3);
+  }, []);
 
   /* useEffect(() => { fetchData(setData, requests.API_URL, requests.fetchTopStories) }, []); */
-  console.log('ARTICLES', articles);
-  
+  console.log("ARTICLES", articles);
+
   return (
     <div>
-     <p>APP</p>
-      {articles.map(article => {   
-        return ( 
+      <p>APP</p>
+      {articles.map((article) => {
+        return (
           <>
-            <Main {...article}/>
+            <Main key={article.id} {...article} />
           </>
-        )})
-      }
-      <button className='btn btn-outline-primary'>Previous Articles</button>
-      <button className='btn btn-outline-primary'>Next 20 Articles</button>
+        );
+      })}
+      <button
+        className="btn btn-outline-primary ml-2 mr-2 mb-2"
+        onClick={() =>
+          setData((articles) => [...articles, "dfjkljbgvdfkljbgdfkl"])
+        }
+      >
+        More
+      </button>
     </div>
-  )
-}
+  );
+};
 
 export default App;
-
