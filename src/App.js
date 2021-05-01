@@ -64,15 +64,11 @@ const App = () => {
             More
           </button>
         </div>
+
         <div class="col col-xl-8 col-lg-8 col-md-8">
           <h2>Article</h2>
-          {/* {articles
-            .filter((item, x) => x < 5)
-            .map((e) => (
-              <p>{e.url}</p>
-            ))}
- */}
           <embed
+            className="show-webpage"
             type="text/html"
             src="https://octetz.com/docs/2020/2020-05-06-linux-hypervisor-setup/"
             style={{ width: "100%", height: "100%" }}

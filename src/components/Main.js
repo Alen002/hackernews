@@ -1,17 +1,19 @@
 import "./Main.css";
 
 const Main = ({ title, by, time, score, descendants, url }) => {
-  function embedding({ url }) {
-    alert(url);
-    <embed src={url}></embed>;
+  function embedded({ url }) {
+    document.querySelector(".show-webpage").src = url;
   }
 
   return (
-    <div className="container-fluid" class="articles mb-4">
-      <span onClick={() => embedding({ url })}>{url}</span>
-
+    <div
+      className="container-fluid"
+      class="articles mb-4"
+      onClick={() => embedded({ url })}
+    >
       <h4>{title}</h4>
-
+      <span>{url}</span>
+      <br />
       <h5>{by}</h5>
       <p>
         Date: {time}
