@@ -8,7 +8,7 @@ const Main = ({ title, by, time, score, descendants, url }) => {
       <h5>{by}</h5>
       <p>Date: {time}</p>
       <p>Score: {score}</p>
-      <p>{descendants}</p>
+      <p>Comments: {descendants}</p>
     </div>
   );
 };
