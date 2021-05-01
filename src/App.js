@@ -49,7 +49,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchData(3);
+    fetchData(10);
   }, []);
 
   /* useEffect(() => { fetchData(setData, requests.API_URL, requests.fetchTopStories) }, []); */
