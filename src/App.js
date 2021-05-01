@@ -41,27 +41,44 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <p>APP</p>
-      {articles
-        .filter((item, x) => x < counter)
-        .map((article, num) => {
-          return (
-            <>
-              <Main key={article.id} {...article} />
-              <p>{counter}</p>
-            </>
-          );
-        })}
-      <button
-        className="btn btn-outline-primary ml-2 mr-2 mb-2"
-        onClick={() => {
-          setCounter(counter + 5);
-          setData(articles);
-        }}
-      >
-        More
-      </button>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col col-xl-4 col-lg-4 col-md-4">
+          <h2>New Articles</h2>
+          {articles
+            .filter((item, x) => x < counter)
+            .map((article) => {
+              return (
+                <>
+                  <Main key={article.id} {...article} />
+                </>
+              );
+            })}
+          <button
+            className="btn btn-outline-primary ml-2 mr-2 mb-2"
+            onClick={() => {
+              setCounter(counter + 5);
+              setData(articles);
+            }}
+          >
+            More
+          </button>
+        </div>
+        <div class="col col-xl-8 col-lg-8 col-md-8">
+          <h2>Article</h2>
+          {/* {articles
+            .filter((item, x) => x < 5)
+            .map((e) => (
+              <p>{e.url}</p>
+            ))}
+ */}
+          <embed
+            type="text/html"
+            src="https://octetz.com/docs/2020/2020-05-06-linux-hypervisor-setup/"
+            style={{ width: "100%", height: "100%" }}
+          ></embed>
+        </div>
+      </div>
     </div>
   );
 };

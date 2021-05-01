@@ -1,3 +1,7 @@
 .container-fluid {
-  background-color: lightblue;
+  background-color: white;
+}
+
+.articles {
+  border-bottom: solid black;
 }

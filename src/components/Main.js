@@ -7,15 +7,18 @@ const Main = ({ title, by, time, score, descendants, url }) => {
   }
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" class="articles mb-4">
       <span onClick={() => embedding({ url })}>{url}</span>
 
       <h4>{title}</h4>
 
       <h5>{by}</h5>
-      <p>Date: {time}</p>
-      <p>Score: {score}</p>
-      <p>Comments: {descendants}</p>
+      <p>
+        Date: {time}
+        <br />
+        Score: {score} <br />
+        Comments: {descendants}
+      </p>
     </div>
   );
 };
