@@ -4,23 +4,12 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import requests from "./Request";
 
-/* const fetchData = async (callback, api, get) => {
-  try {
-    const res = await fetch(api + get);
-    const json = await res.json();
-    console.log(json);  
-    
-    callback(json); 
-  } catch(error) {
-    console.log('No fetching possible');
-  }
-} */
-
 // Start of APP
 const App = () => {
   const [articles, setData] = useState([]);
+  const [counter, setCounter] = useState(5);
 
-  // fetch IDs of topstories
+  // Fetch IDs of topstories
   const fetchData = (more) => {
     fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
       .then((response) => response.json())
@@ -47,29 +36,29 @@ const App = () => {
       })
       .then((data) => setData(data));
   };
-
   useEffect(() => {
-    fetchData(10);
+    fetchData(100);
   }, []);
-
-  /* useEffect(() => { fetchData(setData, requests.API_URL, requests.fetchTopStories) }, []); */
-  console.log("ARTICLES", articles);
 
   return (
     <div>
       <p>APP</p>
-      {articles.map((article) => {
-        return (
-          <>
-            <Main key={article.id} {...article} />
-          </>
-        );
-      })}
+      {articles
+        .filter((item, x) => x < counter)
+        .map((article, num) => {
+          return (
+            <>
+              <Main key={article.id} {...article} />
+              <p>{counter}</p>
+            </>
+          );
+        })}
       <button
         className="btn btn-outline-primary ml-2 mr-2 mb-2"
-        onClick={() =>
-          setData((articles) => [...articles, "dfjkljbgvdfkljbgdfkl"])
-        }
+        onClick={() => {
+          setCounter(counter + 5);
+          setData(articles);
+        }}
       >
         More
       </button>

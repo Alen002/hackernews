@@ -1,10 +1,17 @@
 import "./Main.css";
 
 const Main = ({ title, by, time, score, descendants, url }) => {
+  function embedding({ url }) {
+    alert(url);
+    <embed src={url}></embed>;
+  }
+
   return (
     <div className="container-fluid">
-      <a href={url}>{url}</a>
+      <span onClick={() => embedding({ url })}>{url}</span>
+
       <h4>{title}</h4>
+
       <h5>{by}</h5>
       <p>Date: {time}</p>
       <p>Score: {score}</p>
