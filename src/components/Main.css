@@ -4,4 +4,9 @@
 
 .articles {
   border-bottom: solid black;
+  border-width: thin;
+}
+
+.articles:hover {
+  cursor: pointer;
 }

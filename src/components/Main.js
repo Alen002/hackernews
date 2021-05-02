@@ -1,19 +1,24 @@
+import { useState, React } from "react";
 import "./Main.css";
+import "x-frame-bypass";
 
 const Main = ({ title, by, time, score, descendants, url }) => {
-  function embedded({ url }) {
-    document.querySelector(".show-webpage").src = url;
-  }
+  const embedded = ({ url }) => {
+    document.querySelector(
+      ".show-webpage"
+    ).src = `https://cors.bridged.cc/${url}`;
+  };
 
   return (
     <div
       className="container-fluid"
-      class="articles mb-4"
+      class="articles mb-3"
       onClick={() => embedded({ url })}
     >
       <h4>{title}</h4>
-      <span>{url}</span>
+      {url}
       <br />
+
       <h5>{by}</h5>
       <p>
         Date: {time}
@@ -26,9 +31,3 @@ const Main = ({ title, by, time, score, descendants, url }) => {
 };
 
 export default Main;
-
-/* title
-by
-time
-score -> these are the points
-descendants -> these are the comments */
