@@ -3,8 +3,10 @@
 }
 
 .articles {
-  border-bottom: solid black;
-  border-width: thin;
+  border-color: darkgray !important;
+  border: solid thin;
+  border-radius: 7px;
+  padding: 10px;
 }
 
 .articles:hover {

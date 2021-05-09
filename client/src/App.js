@@ -9,7 +9,7 @@ import "./App.css";
 const App = () => {
   const [articles, setData] = useState([]);
   const [counter, setCounter] = useState(5);
-  const [datas, setDatas] = useState([]);
+  const [datas, setDatas] = useState([counter]);
 
   // fetch IDs of topstories
   const fetchData = (more) => {
@@ -42,14 +42,14 @@ const App = () => {
     fetchData(counter);
   }, [counter]);
 
-  async function serverAPI() {
+  /* async function serverAPI() {
     const response = await fetch("/api/getList");
     const apiResult = await response.json();
     console.log(apiResult);
     setDatas(apiResult);
-  }
+  } */
 
-  useEffect(() => serverAPI(), []);
+  /* useEffect(() => serverAPI(), []); */
 
   let hideButton = { border: "solid" };
   return (
@@ -88,7 +88,7 @@ const App = () => {
                 setData(articles);
               }}
             >
-              Next
+              More
             </button>
           </div>
 

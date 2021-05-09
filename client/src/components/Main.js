@@ -16,7 +16,9 @@ const Main = ({ title, by, time, score, descendants, url, kids }) => {
       /* onClick={() => embedded({ url })} */
     >
       <h4>{title}</h4>
-      <a href={url} /* target="_blank" */>{url}</a>
+      <a href={url} target="blank">
+        {url}
+      </a>
 
       <br />
 
