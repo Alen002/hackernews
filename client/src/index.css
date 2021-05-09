@@ -12,15 +12,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-button {
-  width: 80px;
-}
-
-iframe {
-  border: 0px solid #ffffff;
-}
-
-.sidebar {
-  background-color: #f3f3f6;
-}

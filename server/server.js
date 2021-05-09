@@ -23,3 +23,11 @@ app.get("/", (req, res) => {
 app.get("/webpage", (req, res) => {
   res.send("webpage fetching");
 });
+
+// An api endpoint that returns a short list of items
+app.get("/api/getList", (req, res) => {
+  /* let list = ["item1", "item2", "test"];
+  res.json(list); //json or send */
+  res.redirect("https://blog.svenpeter.dev/posts/m1_sprr_gxf/");
+  console.log("Sent list of items");
+});

@@ -3,14 +3,15 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import requests from "./Request";
-import "x-frame-bypass";
+import "./App.css";
 
 // Start of APP
 const App = () => {
   const [articles, setData] = useState([]);
   const [counter, setCounter] = useState(5);
-  <script type="module" src="https://unpkg.com/x-frame-bypass"></script>;
-  // Fetch IDs of topstories
+  const [datas, setDatas] = useState([]);
+
+  // fetch IDs of topstories
   const fetchData = (more) => {
     fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
       .then((response) => response.json())
@@ -38,9 +39,19 @@ const App = () => {
       .then((data) => setData(data));
   };
   useEffect(() => {
-    fetchData(100);
-  }, []);
+    fetchData(counter);
+  }, [counter]);
 
+  async function serverAPI() {
+    const response = await fetch("/api/getList");
+    const apiResult = await response.json();
+    console.log(apiResult);
+    setDatas(apiResult);
+  }
+
+  useEffect(() => serverAPI(), []);
+
+  let hideButton = { border: "solid" };
   return (
     <>
       <Header />
@@ -58,7 +69,7 @@ const App = () => {
                 );
               })}
             <button
-              className="btn btn-outline-primary ml-2 mr-2 mb-2"
+              className="btn btn-outline-primary ml-2 mr-2 mb-2 "
               onClick={() => {
                 setCounter(counter + 5);
                 setData(articles);
@@ -66,26 +77,21 @@ const App = () => {
             >
               More
             </button>
+            {/* go five articles back */}
+            <button
+              className="btn btn-outline-primary ml-2 mr-2 mb-2"
+              style={counter < 10 ? { display: "none" } : {}}
+              onClick={() => {
+                setCounter(counter - 5);
+                setData(articles);
+              }}
+            >
+              Back
+            </button>
           </div>
 
           <div class="col col-xl-8 col-lg-8 col-md-8">
-            {/* <embed
-              className="show-webpage"
-              type="text/html"
-              src=""
-              style={{ width: "100%", height: "100%" }}
-            ></embed> */}
-            <iframe
-              title="article"
-              className="show-webpage"
-              /* crossOrigin="anonymous"
-              referrerPolicy="origin" */
-              /* is="x-frame-bypass" */
-              Access-Control-Allow-Origin="*"
-              withCredentials="true"
-              src=""
-              style={{ width: "100%", height: "100%" }}
-            />
+            <h2>Comments</h2>
           </div>
         </div>
       </div>
