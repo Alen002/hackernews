@@ -68,6 +68,19 @@ const App = () => {
                   </>
                 );
               })}
+            {/* go five articles back */}
+            <button
+              className="btn btn-outline-primary ml-2 mr-2 mb-2"
+              // hide previous button if counter < 10
+              style={counter < 10 ? { visibility: "hidden" } : {}}
+              onClick={() => {
+                setCounter(counter - 5);
+                setData(articles);
+              }}
+            >
+              Back
+            </button>
+            {/* display next 5 articles */}
             <button
               className="btn btn-outline-primary ml-2 mr-2 mb-2 "
               onClick={() => {
@@ -75,18 +88,7 @@ const App = () => {
                 setData(articles);
               }}
             >
-              More
-            </button>
-            {/* go five articles back */}
-            <button
-              className="btn btn-outline-primary ml-2 mr-2 mb-2"
-              style={counter < 10 ? { display: "none" } : {}}
-              onClick={() => {
-                setCounter(counter - 5);
-                setData(articles);
-              }}
-            >
-              Back
+              Next
             </button>
           </div>
 
