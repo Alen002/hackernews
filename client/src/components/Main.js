@@ -9,6 +9,16 @@ const Main = ({ title, by, time, score, descendants, url, kids }) => {
     ).src = `https://cors.bridged.cc/${url}`;
   }; */
 
+  // Convert unix timestamp to date figures
+  const convertTimestamp = (timestamp) => {
+    const dateNew = new Date(timestamp * 1000);
+
+    const year = dateNew.getFullYear();
+    const day = ("0" + dateNew.getDate()).slice(-2);
+    var month = ("0" + (dateNew.getMonth() + 1)).slice(-2);
+    return `${day}.${month}.${year}`;
+  };
+
   return (
     <div
       className="container-fluid"
@@ -24,7 +34,7 @@ const Main = ({ title, by, time, score, descendants, url, kids }) => {
 
       <h5>{by}</h5>
       <p>
-        Date: {Date(time)} {/* DATE Unix timestamt */}
+        Posted: {convertTimestamp(time)}
         <br />
         Score: {score} <br />
         Comments: {descendants}
