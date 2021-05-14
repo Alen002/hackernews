@@ -3,12 +3,6 @@ import "./Main.css";
 import "x-frame-bypass";
 
 const Main = ({ title, by, time, score, descendants, url, kids }) => {
-  /* const embedded = ({ url }) => {
-    document.querySelector(
-      ".show-webpage"
-    ).src = `https://cors.bridged.cc/${url}`;
-  }; */
-
   // Convert unix timestamp to date figures
   const convertTimestamp = (timestamp) => {
     const dateNew = new Date(timestamp * 1000);
@@ -30,16 +24,16 @@ const Main = ({ title, by, time, score, descendants, url, kids }) => {
     if (diffDays == 1) {
       comment = "day ago";
     }
+    if (diffDays == 0) {
+      comment = "today";
+      return `${comment}`;
+    }
 
     return `${diffDays} ${comment}`;
   };
 
   return (
-    <div
-      className="container-fluid"
-      class="articles mb-3"
-      /* onClick={() => embedded({ url })} */
-    >
+    <div className="container-fluid" class="articles mb-3">
       <h4>{title}</h4>
       <a href={url} target="blank">
         {url}
@@ -47,8 +41,8 @@ const Main = ({ title, by, time, score, descendants, url, kids }) => {
       <br />
       <h5>{by}</h5>
       <p>
-        Published: {convertTimestamp(time)} <br />
         Posted {daysAgo(time)} <br />
+        Date: {convertTimestamp(time)} <br />
         Score: {score} <br />
         Comments: {descendants}
         {kids}
