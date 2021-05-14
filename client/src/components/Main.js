@@ -24,7 +24,7 @@ const Main = ({ title, by, time, score, descendants, url, kids }) => {
 
       <h5>{by}</h5>
       <p>
-        Date: {time}
+        Date: {Date(time)} {/* DATE Unix timestamt */}
         <br />
         Score: {score} <br />
         Comments: {descendants}
