@@ -19,6 +19,21 @@ const Main = ({ title, by, time, score, descendants, url, kids }) => {
     return `${day}.${month}.${year}`;
   };
 
+  // Calculate how old the news are
+  const daysAgo = (timestamp) => {
+    const dateOfArticle = new Date(timestamp * 1000);
+    const actualDate = new Date();
+
+    const diffTime = Math.abs(actualDate - dateOfArticle);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) - 1;
+    let comment = "days ago";
+    if (diffDays == 1) {
+      comment = "day ago";
+    }
+
+    return `${diffDays} ${comment}`;
+  };
+
   return (
     <div
       className="container-fluid"
@@ -29,13 +44,11 @@ const Main = ({ title, by, time, score, descendants, url, kids }) => {
       <a href={url} target="blank">
         {url}
       </a>
-
       <br />
-
       <h5>{by}</h5>
       <p>
-        Posted: {convertTimestamp(time)}
-        <br />
+        Published: {convertTimestamp(time)} <br />
+        Posted {daysAgo(time)} <br />
         Score: {score} <br />
         Comments: {descendants}
         {kids}
